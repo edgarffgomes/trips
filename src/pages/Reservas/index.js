@@ -1,20 +1,35 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import './style.css';
+import {useSelector } from 'react-redux'
 import { MdDelete } from 'react-icons/md';
 
 export default function Reservas () {
+  const reserves = useSelector(state=>state.reserve)
+  const dispatch = useDispatch();
+  function handleRemove(id){
+    dispatch({
+      type: 'REMOVE_RESERVE',
+      id,
+    })
+
+  }
   return (
     <div>
-        <h1 className='title'>Você solicitou 1 reserva</h1>
+        <h1 className='title'>Você solicitou {reserves.length} reserva(s)</h1>
 
-        <div className='reservas'>
-          <img src='https://sujeitoprogramador.com/wp-content/uploads/2019/12/maceio.jpg' alt='Maceió'/>
-          <strong>Viagem Maceió 7 dias</strong>
-          <span>Quantidade: 1</span>
-          <button type='button' onClick={()=>{}}>
+       {reserves.map(reserve =>(
+        <div className='reservas' key={reserve.id}>
+          <img src={reserve.image} alt={reserve.title}/>
+          <strong>{reserve.title}</strong>
+          <span>Quantidade: {reserve.amount}</span>
+          <button type='button' onClick={()=>handleRemove(reserve.id)}>
             <MdDelete size={20} color='#191919'/>
           </button>
         </div>
+       ))}
+
+        
         <div>
           <footer>
             <button>SOLICITAR RESERVAS</button>
