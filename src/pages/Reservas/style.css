@@ -13,11 +13,18 @@
 .reservas img{
     height: 100px;
 }
+.reservas #amount{
+    display: flex;
+    align-items: center;
+}
 .reservas span{
-    color: #191919;
+    text-align: center;
+    border-radius: 4px;
+    color: #242422;
+    padding: 5px;
+    width: 50px;
 }
 .reservas button{
-    border: 0;
     background: #FFF;
 }
 footer button{
